@@ -4,6 +4,8 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\City;
+use App\Models\Country;
 use App\Models\Post;
 use Illuminate\Support\Facades\DB;
 
@@ -65,10 +67,42 @@ class HomeController extends Controller
 //        $data = DB::table('city')->select('city.ID', 'city.Name as city_name', 'country.Code', 'country.Name as country_name')->limit(10)->join('country', 'city.CountryCode', '=', 'country.Code')->groupBy('city.ID')->get();
 //        dd($data);
 
-        $post = new Post();
-        $post->title = 'Статья 2';
-//        $post->content = 'Lorem ipsum 1';
-        $post->save();
+//        $post = new Post();
+//        $post->title = 'Статья 2';
+////        $post->content = 'Lorem ipsum 1';
+//        $post->save();
+
+//        $data = Country::all();
+//        $data = Country::limit(5)->get(); //phpstorm не видит методы. В модели Country был добавлен @mixin Builder для подсказок
+//        $data = Country::query()->limit(5)->get(); // данный способ работает с подсказками сразу же
+//        $data = Country::where('code','<','ALB')->select('Code','Name')->limit(2)->offset(1)->get();
+//        $data = City::find(5);
+//        $data = Country::find('AGO');
+//        dd($data);
+
+//        $post = new Post();
+//        $post->title = 'Post 4';
+//        $post->content = 'Lorem ipsum 4';
+//        $post->save();
+
+//        Post::create(['title' => 'Post 6', 'content' => 'Lorem 6']);
+
+//        $post = new Post();
+//        $post->fill(['title' => 'Post 8', 'content' => 'Lorem 8']);
+//        $post->save();
+
+//        $post = Post::find(6);
+//        $post->content = 'Lorem ipsum 6';
+//        $post->save();
+
+//        Post::where('id', '>', 3)->update(['updated_at' => NOW()]);
+
+//        $post = Post::find(6);
+//        $post->delete();
+
+//        Post::destroy(11);
+//        Post::destroy([4,5]);
+        Post::destroy(4, 5);
         return view('home', ['res' => 5, 'name' => 'John']);
 
     }
