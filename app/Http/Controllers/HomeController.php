@@ -118,6 +118,7 @@ class HomeController extends Controller
         dd($rubric->posts);
         return view('home', ['res' => 5, 'name' => 'John']);
 
+        
     }
 
     public function test(): string
