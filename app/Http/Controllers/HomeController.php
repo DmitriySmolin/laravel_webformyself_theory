@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Post;
+use App\Models\Rubric;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -81,8 +82,8 @@ class HomeController extends Controller
 //        dd($data);
 
 //        $post = new Post();
-//        $post->title = 'Post 4';
-//        $post->content = 'Lorem ipsum 4';
+//        $post->title = 'Post 2';
+//        $post->content = 'Lorem ipsum 2';
 //        $post->save();
 
 //        Post::create(['title' => 'Post 6', 'content' => 'Lorem 6']);
@@ -102,7 +103,19 @@ class HomeController extends Controller
 
 //        Post::destroy(11);
 //        Post::destroy([4,5]);
-        Post::destroy(4, 5);
+//        Post::destroy(4, 5);
+
+        /* Связи моделей - One to one */
+        $post = Post::find(3);
+//        dd($post);
+//        dd($post->title, $post->rubric->title);
+
+        $rubric = Rubric::find(3);
+        dd($rubric->title, $rubric->post->title);
+
+        /* Связи моделей - One to Many */
+        $rubric = Rubric::find(1);
+        dd($rubric->posts);
         return view('home', ['res' => 5, 'name' => 'John']);
 
     }

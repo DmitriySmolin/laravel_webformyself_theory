@@ -24,4 +24,9 @@ class Post extends Model
 //        'content' => 'Lorem ipsum...'
 //    ]; // массив, с помощью которого мы можем определять автоматическое заполнение для полей
     protected $fillable = ['title', 'content']; // список белых полей, которые мы можем заполнять массово через QueryBuilder
+
+    /* Связи моделей - One to one | One to Many */
+    public function Rubric(){
+        return $this->belongsTo(Rubric::class);
+    }
 }
