@@ -149,9 +149,9 @@ class HomeController extends Controller
 //        return view('home', ['res' => 5, 'name' => 'John']);
 
         /* Шаблоны Blade. Часть 2 */
-
-        $title = 'Home Page';
-        return view('home', compact('title'));
+        $title = 'Home Page!';
+        $h1 = '<h1>home page</h1>';
+        return view('home', compact('title', 'h1'));
     }
 
     public function test(): string
