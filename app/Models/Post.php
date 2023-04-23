@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class City
+ * Class Post
  * @package App\Models
  * @mixin Builder Добавляет подсказки при работе с Eloquent ORM
  */
@@ -26,7 +26,14 @@ class Post extends Model
     protected $fillable = ['title', 'content']; // список белых полей, которые мы можем заполнять массово через QueryBuilder
 
     /* Связи моделей - One to one | One to Many */
-    public function Rubric(){
+    public function rubric()
+    {
         return $this->belongsTo(Rubric::class);
+    }
+
+    /* Связи моделей - Many to Many */
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 }
