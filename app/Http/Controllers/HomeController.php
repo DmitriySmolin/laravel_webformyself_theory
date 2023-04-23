@@ -151,7 +151,13 @@ class HomeController extends Controller
         /* Шаблоны Blade. Часть 2 */
         $title = 'Home Page!';
         $h1 = '<h1>home page</h1>';
-        return view('home', compact('title', 'h1'));
+        $data1 = range(1, 20);
+        $data2 = [
+            'title' => 'Title',
+            'content' => 'Content',
+            'keywords' => 'Keywords'
+        ];
+        return view('home', compact('title', 'h1', 'data1', 'data2'));
     }
 
     public function test(): string
