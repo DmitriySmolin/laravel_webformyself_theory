@@ -149,15 +149,20 @@ class HomeController extends Controller
 //        return view('home', ['res' => 5, 'name' => 'John']);
 
         /* Шаблоны Blade. Часть 2 */
+//        $title = 'Home Page!';
+//        $h1 = '<h1>home page</h1>';
+//        $data1 = range(1, 20);
+//        $data2 = [
+//            'title' => 'Title',
+//            'content' => 'Content',
+//            'keywords' => 'Keywords'
+//        ];
+//        return view('home', compact('title', 'h1', 'data1', 'data2'));
+
+        /* Шаблоны Blade. Часть 4 */
         $title = 'Home Page!';
-        $h1 = '<h1>home page</h1>';
-        $data1 = range(1, 20);
-        $data2 = [
-            'title' => 'Title',
-            'content' => 'Content',
-            'keywords' => 'Keywords'
-        ];
-        return view('home', compact('title', 'h1', 'data1', 'data2'));
+        $posts = Post::orderBy('id', 'desc')->get();
+        return view('home', compact('title', 'posts'));
     }
 
     public function test(): string

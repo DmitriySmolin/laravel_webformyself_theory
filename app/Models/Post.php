@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use IntlDateFormatter;
 
 /**
  * Class Post
@@ -35,5 +37,16 @@ class Post extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function getPostDate()
+    {
+//        №1
+//        $formatter = new IntlDateFormatter('ru_RU', IntlDateFormatter::FULL, IntlDateFormatter::FULL);
+//        $formatter->setPattern('d MMM y');
+//        return $formatter->format(new \DateTime($this->created_at));
+//        №2
+        return Carbon::parse($this->created_at)->diffForHumans();
+
     }
 }
