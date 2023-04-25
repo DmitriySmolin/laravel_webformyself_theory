@@ -10,6 +10,7 @@ use App\Models\Post;
 use App\Models\Rubric;
 use App\Models\Tag;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -59,7 +60,7 @@ class HomeController extends Controller
 //        )->get();
 //        $data = DB::table('city')->where('id', '<', 5)->value('Name'); // Получить одно строковое значение из колонки
 //        $data = DB::table('country')->limit(10)->pluck('Name'); // Получить все значения из колонки
-//        $data = DB::table('country')->limit(10)->pluck('Name','Code'); // Получить все значения из колонки, где ключ 'Code'
+//        $data = DB::table('country')->limit(10)->pluck('Name','Code'); // Получить все значения из колонки в формате Code => Name, где ключ 'Code'
 //        $data = DB::table('country')->count();
 //        $data = DB::table('country')->max('Population');
 //        $data = DB::table('country')->min('Population');
@@ -87,7 +88,7 @@ class HomeController extends Controller
 //        $post->content = 'Lorem ipsum 2';
 //        $post->save();
 
-//        Post::create(['title' => 'Post 6', 'content' => 'Lorem 6']);
+//        Post::create(['title' => 'Post 6', 'content' => 'Lorem 6']);0 // массовое заполнение полей00
 
 //        $post = new Post();
 //        $post->fill(['title' => 'Post 8', 'content' => 'Lorem 8']);
@@ -163,6 +164,23 @@ class HomeController extends Controller
         $title = 'Home Page!';
         $posts = Post::orderBy('id', 'desc')->get();
         return view('home', compact('title', 'posts'));
+    }
+
+    public function create()
+    {
+        $title = 'Create Post';
+        $rubrics = Rubric::pluck('title','id')->all();
+        return view('create', compact('title','rubrics'));
+    }
+
+    public function store( Request $request)
+    {
+//        dump($request->input('title'));
+//        dump($request->input('content'));
+//        dd($request->input('rubric_id'));
+//        dd($request->all());
+        Post::create($request->all());
+        return redirect()->route('home');
     }
 
     public function test(): string

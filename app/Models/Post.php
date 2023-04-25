@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use IntlDateFormatter;
 
 /**
- * Class Post
+ * Class Post0
  * @package App\Models
  * @mixin Builder Добавляет подсказки при работе с Eloquent ORM
  */
@@ -25,7 +25,7 @@ class Post extends Model
 //    protected $attributes = [
 //        'content' => 'Lorem ipsum...'
 //    ]; // массив, с помощью которого мы можем определять автоматическое заполнение для полей
-    protected $fillable = ['title', 'content']; // список белых полей, которые мы можем заполнять массово через QueryBuilder
+    protected $fillable = ['title', 'content', 'rubric_id']; // список белых полей, которые мы можем заполнять массово через QueryBuilder
 
     /* Связи моделей - One to one | One to Many */
     public function rubric()
