@@ -11,6 +11,7 @@ use App\Models\Rubric;
 use App\Models\Tag;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
@@ -169,16 +170,40 @@ class HomeController extends Controller
     public function create()
     {
         $title = 'Create Post';
-        $rubrics = Rubric::pluck('title','id')->all();
-        return view('create', compact('title','rubrics'));
+        $rubrics = Rubric::pluck('title', 'id')->all();
+        return view('create', compact('title', 'rubrics'));
     }
 
-    public function store( Request $request)
+    public function store(Request $request)
     {
 //        dump($request->input('title'));
 //        dump($request->input('content'));
 //        dd($request->input('rubric_id'));
 //        dd($request->all());
+
+//        Стандартный валидатор (возможно кастомизировать за счет добавления локали для языка)
+        $this->validate($request, [
+            'title' => 'required|min:5|max:100',
+            'content' => 'required',
+            'rubric_id' => 'integer'
+        ]);
+
+        // Кастомный валидатор
+//        $rules = [
+//            'title' => 'required|min:5|max:100',
+//            'content' => 'required',
+//            'rubric_id' => 'integer'
+//        ];
+//        $messages = [
+//            'title.required' => 'Заполните поле названия',
+//            'title.min' => 'Минимум 5 символов в названии',
+//            'title.max' => 'Максимум 100 символов в названии',
+//            'content.required' => ' Заполните поле контент',
+//            'rubric_id.integer' => 'Выберите рубрику из списка'
+//        ];
+
+//        $validator = Validator::make($request->all(), $rules, $messages)->validate();
+
         Post::create($request->all());
         return redirect()->route('home');
     }

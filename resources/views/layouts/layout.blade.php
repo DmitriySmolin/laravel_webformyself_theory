@@ -130,6 +130,7 @@
 </header>
 
 <main>
+    @include('layouts.errors')
     @yield('content')
 </main>
 
