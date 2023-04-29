@@ -9,7 +9,9 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.111.3">
-    <title>@section('title') My Site @show</title>
+    <title>@section('title')
+            My Site
+        @show</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -130,7 +132,7 @@
 </header>
 
 <main>
-    @include('layouts.errors')
+    @include('layouts.alerts')
     @yield('content')
 </main>
 

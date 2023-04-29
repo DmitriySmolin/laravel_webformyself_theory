@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
 //        return 'Hello, World!';
 //        dump($_ENV['MY_SETTING']);
@@ -164,6 +164,33 @@ class HomeController extends Controller
         /* Шаблоны Blade. Часть 4 */
         $title = 'Home Page!';
         $posts = Post::orderBy('id', 'desc')->get();
+
+        //Session
+//        $request->session()->put('test', 'Test value'); // запись в сессию
+//        dump($request->session()->all()); // запись в сессию
+//        session([
+//                'cart' => [
+//                    [
+//                        'id' => 1, 'title' => 'Product 1'
+//                    ],
+//                    [
+//                        'id' => 2, 'title' => 'Product 2'
+//                    ],
+//                ]
+//            ]
+//        );
+//        получение данных из сессий
+//        dump(session('test'));
+//        dump(session('cart')[1]['title']);
+//        dump($request->session()->get('cart')[0]['title']);
+
+        //вставка элементов в сессию
+//        $request->session()->push('cart',['id' => 3, 'title' => 'Product 3']);
+
+//        dump($request->session()->pull('test')); // чтение и удаление записи из сессии
+//         $request->session()->forget('test'); // удалить элемент из сессии
+//        $request->session()->flush(); // полное очищение сессии, удаляет служебные данне
+        dump(session()->all());
         return view('home', compact('title', 'posts'));
     }
 
@@ -205,6 +232,7 @@ class HomeController extends Controller
 //        $validator = Validator::make($request->all(), $rules, $messages)->validate();
 
         Post::create($request->all());
+        $request->session()->flash('success', 'Данные сохранены!');
         return redirect()->route('home');
     }
 
